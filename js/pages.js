@@ -54,6 +54,15 @@
     return out
   }
 
+  const UNIT_LABELS = { listening: 'Listening', vocabulary: 'Vocabulary', grammar: 'Grammar', reading: 'Reading', writing: 'Writing' }
+  SC.unitScreens = () => {
+    const U = D().unit4
+    if (!U) return []
+    return Object.keys(UNIT_LABELS).flatMap((sec) =>
+      SC.shuffle(U.items[sec] || []).slice(0, U.counts[sec] || 0).map((q) => screen({ taskId: sec, label: UNIT_LABELS[sec], help: '' }, q)))
+  }
+  SC.taskLabel = (id) => D()[paperOfTask(id)]?.tasks?.[id]?.label || UNIT_LABELS[id] || id
+
   SC.recordResult = (examId, { score, total, byTask }) => {
     const s = SC.loadStats()
     s.stars += score
@@ -64,7 +73,7 @@
   }
 
   SC.examTitle = (examId) =>
-    findMock(examId)?.title ||
+    findMock(examId)?.title || (examId === 'U4' ? D().unit4?.title : '') ||
     (examId.startsWith('task:') ? `Practice · ${D()[paperOfTask(examId.slice(5))]?.tasks[examId.slice(5)]?.label}` : examId)
 
   // ---------------------------------------------------------------- DOM
@@ -99,11 +108,10 @@
           h('h2', {}, title),
           h('p', { class: 'question' }, `${res.score} / ${res.total}  ${stars(res.score, res.total)}`)),
         h('table', { class: 'results' }, ...tasks.map(([id, v]) => {
-          const label = D()[paperOfTask(id)]?.tasks?.[id]?.label || id
-          return h('tr', {}, h('td', {}, label), h('td', {}, `${v.c} / ${v.t}`))
+          return h('tr', {}, h('td', {}, SC.taskLabel(id)), h('td', {}, `${v.c} / ${v.t}`))
         })),
         h('div', { class: 'actions' },
-          h('button', { class: 'primary', onclick: () => SC.startRun(examId, examId.startsWith('task:') ? SC.taskScreens(examId.slice(5)) : screens, title, back) }, 'Try again 🔁'),
+          h('button', { class: 'primary', onclick: () => SC.startRun(examId, examId.startsWith('task:') ? SC.taskScreens(examId.slice(5)) : examId === 'U4' ? SC.unitScreens() : screens, title, back) }, 'Try again 🔁'),
           h('button', { class: 'secondary', onclick: () => { SC.show(back); renderAll() } }, '← Back')),
       )
     }, { title })
@@ -139,8 +147,17 @@
         : h('p', { class: 'muted' }, 'No exams yet. Try one!'))
   }
 
-  const renderAll = () => { renderMocks(); renderTasks(); renderHistory() }
-  SC.onShow = (v) => { if (v === 'mocks' || v === 'tasks' || v === 'progress') renderAll() }
+  const renderUnit = () => {
+    const U = D().unit4
+    if (!U) return
+    $('unitArea').replaceChildren(
+      h('p', { class: 'muted' }, 'Listening, vocabulary, grammar, reading and writing · about 6 minutes'),
+      h('p', {}, lastBest('U4')),
+      h('button', { class: 'primary', onclick: () => SC.startRun('U4', SC.unitScreens(), U.title, 'unit4') }, 'Start Unit 4 ▶'))
+  }
+
+  const renderAll = () => { renderMocks(); renderTasks(); renderHistory(); renderUnit() }
+  SC.onShow = (v) => { if (['mocks', 'tasks', 'progress', 'unit4'].includes(v)) renderAll() }
   document.addEventListener('DOMContentLoaded', renderAll)
   if (document.readyState !== 'loading') renderAll()
 })(globalThis)
