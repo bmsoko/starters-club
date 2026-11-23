@@ -84,6 +84,111 @@
           }),
         ],
       },
+
+      {
+        id: 'L-T2',
+        title: 'Listening · Test 2',
+        tasks: [
+          task('L1', {
+            example: pick('The duck is in the water.', ['🦆🌊', '🦆🌳', '🐄🌊'], '🦆🌊'),
+            questions: [
+              pick('The woman has got long hair and glasses.', ['👩‍🦰👓', '👩‍🦰', '👨👓'], '👩‍🦰👓'),
+              pick('There are four eggs in the box.', ['🥚🥚🥚🥚📦', '🥚🥚📦', '🍎🍎🍎🍎📦'], '🥚🥚🥚🥚📦'),
+            ],
+          }),
+          task('L2', {
+            intro: 'My name is Alex. On Sunday I go to the zoo with my grandma. First we see the monkeys. They are very funny! Then we see a big elephant. It is drinking water. We have lunch next to the lake. I eat a burger and Grandma eats a salad. At the end I buy a toy tiger. I love the zoo!',
+            example: pick('Where does Alex go?', ['🦁', '🏫', '🏥'], '🦁', 'Where does Alex go?'),
+            questions: [
+              pick('Who goes with Alex?', ['👵', '👨', '👧'], '👵', 'Who goes with Alex?'),
+              pick('What do they see first?', ['🐒', '🐘', '🐍'], '🐒', 'What do they see first?'),
+              pick('What is the elephant doing?', ['🐘💧', '🐘😴', '🐘🍌'], '🐘💧', 'What is the elephant doing?'),
+              pick('What does Alex eat?', ['🍔', '🥗', '🍕'], '🍔', 'What does Alex eat?'),
+              pick('What does Alex buy?', ['🐯', '🦒', '🐻'], '🐯', 'What does Alex buy?'),
+            ],
+          }),
+          task('L3', {
+            example: notes('What\'s your name? Kim. K, I, M.', 'Name of the girl', 'Kim'),
+            questions: [
+              notes('What\'s your fish called? Nemo? No, it\'s Bob. B, O, B.', 'Name of the fish', 'Bob'),
+              notes('How many children are in your class? Eighteen.', 'Children in the class', '18'),
+              notes('What\'s your friend\'s name? Yusef. Y, U, S, E, F.', 'Name of the friend', 'Yusef'),
+              notes('How old is your grandpa? He\'s... no, sorry. How old is your cousin? She\'s twelve.', 'Age of the cousin', '12'),
+              notes('What\'s the name of your school? Hill School. H, I, L, L.', 'Name of the school: … School', 'Hill'),
+            ],
+          }),
+          task('L4', {
+            example: reply('Good morning!', ['Good morning!', 'Goodbye!', 'Yes, I can.'], 'Good morning!'),
+            questions: [
+              reply('What\'s your favourite food?', ['Pizza!', 'Blue!', 'My dog!'], 'Pizza!'),
+              reply('Have you got a pet?', ['Yes, I have.', 'Yes, I do.', 'Yes, it is.'], 'Yes, I have.'),
+              reply('Where do you live?', ['In a flat.', 'I\'m eight.', 'With a ball.'], 'In a flat.'),
+            ],
+          }),
+          task('L5', {
+            example: place('Put the fish in the boat.', '🐟', PARK, 'boat'),
+            questions: [
+              place('Look at the cat. Put the cat in the tree.', '🐈', PARK, 'tree'),
+              place('Put the bike next to the house.', '🚲', PARK, 'house'),
+              place('Now the frog. Put the frog under the car.', '🐸', PARK, 'car'),
+              colour('Colour the ball blue.', ['⚽', '🎈', '🧦', '🪣'], '⚽', 'blue'),
+              colour('Can you see the sock? Colour the sock pink.', ['⚽', '🎈', '🧦', '🪣'], '🧦', 'pink'),
+            ],
+          }),
+        ],
+      },
+      {
+        id: 'L-T3',
+        title: 'Listening · Test 3',
+        tasks: [
+          task('L1', {
+            example: pick('The boy is running.', ['👦🏃', '👦🏊', '👧🏃'], '👦🏃'),
+            questions: [
+              pick('There is a big ship on the sea.', ['🚢🌊', '⛵🌊', '🚢🏙️'], '🚢🌊'),
+              pick('The baby is crying.', ['👶😭', '👶😀', '👴😭'], '👶😭'),
+            ],
+          }),
+          task('L2', {
+            intro: 'Hi, I\'m Grace. Today it is raining, so I play at home with my brother Tom. We play a game on the computer. Then we draw pictures. I draw a horse and Tom draws a train. Mum makes some cookies. At six o\'clock Dad comes home. He has got a new ball for us!',
+            example: pick('What is the weather like?', ['🌧️', '☀️', '❄️'], '🌧️', 'What is the weather like?'),
+            questions: [
+              pick('Who does Grace play with?', ['👦', '👵', '🐕'], '👦', 'Who does Grace play with?'),
+              pick('What do they play first?', ['💻', '⚽', '🎸'], '💻', 'What do they play first?'),
+              pick('What does Grace draw?', ['🐴', '🚂', '🏠'], '🐴', 'What does Grace draw?'),
+              pick('What does Mum make?', ['🍪', '🍕', '🍝'], '🍪', 'What does Mum make?'),
+              pick('What has Dad got?', ['⚽', '🪁', '📕'], '⚽', 'What has Dad got?'),
+            ],
+          }),
+          task('L3', {
+            example: notes('How many dogs have you got? Two.', 'Number of dogs', '2'),
+            questions: [
+              notes('What\'s your teacher\'s name? Mr Brown. B, R, O, W, N.', 'Name of the teacher: Mr …', 'Brown'),
+              notes('How many apples are there? Thirteen.', 'Number of apples', '13'),
+              notes('What\'s your baby brother\'s name? Dan. D, A, N.', 'Name of the baby', 'Dan'),
+              notes('What\'s the name of the park? Rose Park. R, O, S, E.', 'Name of the park: … Park', 'Rose'),
+              notes('How old is Anna? She\'s ten.', 'Age of Anna', '10'),
+            ],
+          }),
+          task('L4', {
+            example: reply('Thank you!', ['You\'re welcome!', 'Yes, please.', 'I\'m six.'], 'You\'re welcome!'),
+            questions: [
+              reply('Can I have a pencil, please?', ['Here you are.', 'Yes, I am.', 'It\'s Monday.'], 'Here you are.'),
+              reply('How many brothers have you got?', ['One.', 'Blue.', 'Yes.'], 'One.'),
+              reply('What are you doing?', ['I\'m reading.', 'I\'m seven.', 'I\'m Tom.'], 'I\'m reading.'),
+            ],
+          }),
+          task('L5', {
+            example: place('Put the shoe under the bed.', '👟', ROOM, 'bed'),
+            questions: [
+              place('Put the clock on the window.', '⏰', ROOM, 'window'),
+              place('Can you see the doll? Put the doll in the box.', '🪆', ROOM, 'box'),
+              place('Now put the lamp next to the door.', '💡', ROOM, 'door'),
+              colour('Look at the hat. Colour the hat brown.', ['🎩', '👗', '👟', '🧢'], '🎩', 'brown'),
+              colour('Now colour the dress yellow, please.', ['🎩', '👗', '👟', '🧢'], '👗', 'yellow'),
+            ],
+          }),
+        ],
+      },
     ],
     // Extra questions for "Practice by task" (on top of the mock questions)
     bank: {
@@ -94,13 +199,18 @@
         pick('These are peas.', ['🫛', '🍐', '🍕'], '🫛'),
         pick('The spider is on the wall.', ['🕷️🧱', '🕷️🌳', '🐌🧱'], '🕷️🧱'),
       ],
-      L2: [
+      L2: [...[
         pick('Where does Yusef go on Saturday?', ['🏖️', '🏫', '🏥'], '🏖️', 'Where does he go?'),
         pick('What does Yusef find on the beach?', ['🐚', '👟', '📱'], '🐚', 'What does he find?'),
         pick('What is the weather like?', ['☀️', '🌧️', '❄️'], '☀️', 'What is the weather like?'),
         pick('What does Yusef drink?', ['🧃', '🥛', '☕'], '🧃', 'What does he drink?'),
         pick('How does Yusef go home?', ['🚌', '🚲', '✈️'], '🚌', 'How does he go home?'),
-      ].map((q) => ({ ...q, intro: 'On Saturday Yusef goes to the beach with his mum. The sun is hot. He swims in the sea and finds a beautiful shell. He drinks orange juice. Then he goes home on the bus.' })),
+      ].map((q) => ({ ...q, intro: 'On Saturday Yusef goes to the beach with his mum. The sun is hot. He swims in the sea and finds a beautiful shell. He drinks orange juice. Then he goes home on the bus.' })), ...[
+        pick('What does Wendy have for breakfast?', ['🥚🍞', '🍕', '🍰'], '🥚🍞', 'What does Wendy eat?'),
+        pick('How does Wendy go to school?', ['🚲', '🚌', '🚗'], '🚲', 'How does she go to school?'),
+        pick('What is Wendy\'s favourite lesson?', ['🎨', '🔢', '⚽'], '🎨', 'What is her favourite lesson?'),
+        pick('Who sits next to Wendy?', ['👧', '👦', '👩‍🏫'], '👧', 'Who sits next to her?'),
+      ].map((q) => ({ ...q, intro: 'Wendy gets up at seven o\'clock. She eats eggs and bread for breakfast. She rides her bike to school. Her favourite lesson is art because she loves painting. Her best friend Jill sits next to her.' }))],
       L3: [
         notes('What\'s your cat\'s name? Lucy. L, U, C, Y.', 'Name of the cat', 'Lucy'),
         notes('Who is your friend? Pat. P, A, T.', 'Name of the friend', 'Pat'),
@@ -109,6 +219,8 @@
         notes('How old is your sister? She\'s six.', 'Age of the sister', '6'),
         notes('What\'s the horse\'s name? Wendy. W, E, N, D, Y.', 'Name of the horse', 'Wendy'),
         notes('How many pencils are in the box? Twenty.', 'Number of pencils', '20'),
+        notes('What\'s the name of your robot? Toby. T, O, B, Y.', 'Name of the robot', 'Toby'),
+        notes('How many cows are on the farm? Seventeen.', 'Number of cows', '17'),
       ],
       L4: [
         reply('Where is your pen?', ['It\'s in my bag.', 'It\'s blue.', 'I\'m six.'], 'It\'s in my bag.'),
@@ -124,6 +236,8 @@
         colour('Colour the flower yellow.', ['🌷', '🏠', '🚗', '⛵'], '🌷', 'yellow'),
         colour('Now colour the boat orange.', ['🌷', '🏠', '🚗', '⛵'], '⛵', 'orange'),
         place('Put the snake under the car.', '🐍', PARK, 'car'),
+        place('Put the robot on the sofa.', '🤖', ROOM, 'sofa'),
+        colour('Colour the balloon red.', ['🎈', '🪁', '🧸', '🚗'], '🎈', 'red'),
       ],
     },
   }
