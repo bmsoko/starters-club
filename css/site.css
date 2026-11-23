@@ -28,3 +28,14 @@ input{font:inherit;padding:12px;border:2px solid var(--line);border-radius:10px}
 @media(max-width:600px){.choices{grid-template-columns:1fr}
 }
 
+/* --- Mock exams --- */
+.choices.pics{grid-template-columns:repeat(3,1fr)}.choices.pics .choice{font-size:40px;text-align:center;min-height:86px}
+.choice:disabled{cursor:default}.choice.wrong{border-color:#d66;background:#fff0ed}
+.note{background:#fffbe8;border:2px dashed #e6d28a;border-radius:14px;padding:14px;margin:14px 0}
+.note-slots{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.slot{display:inline-flex;align-items:center;justify-content:center;width:40px;height:46px;border-bottom:3px solid var(--ink);font-size:24px;font-weight:800}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.tile{width:48px;height:48px;font-size:22px;background:#ffd166;color:var(--ink);padding:0}.tile:disabled{opacity:.3}
+.scene{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:14px 0}.spot{position:relative;width:84px;height:84px;font-size:44px;background:white;border:3px solid var(--line);border-radius:50%;padding:0}
+.spot.selected{border-color:var(--ink)}.spot.correct{border-color:var(--teal);box-shadow:0 0 0 4px var(--mint)}.spot.wrong{border-color:#d66}
+.placed{position:absolute;right:-6px;bottom:-6px;font-size:30px}.big{font-size:40px}
+.crayons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.crayon{width:40px;height:40px;border-radius:50%;padding:0;border:3px solid white;box-shadow:0 0 0 1px var(--line)}.crayon.selected{border-color:var(--ink);transform:scale(1.15)}
+button:disabled{cursor:default}.primary:disabled{opacity:.4}

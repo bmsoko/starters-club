@@ -85,3 +85,35 @@ globalThis.SC.noAudio = () => {
   const n = typeof document !== 'undefined' && document.getElementById('noAudio')
   if (n) n.classList.remove('hidden')
 }
+
+// Shared constants and tiny DOM helper used by renderers.
+globalThis.SC.COLOURS = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'brown', 'grey', 'black']
+globalThis.SC.SWATCH = {
+  red: '#ef4444', blue: '#3b82f6', green: '#22c55e', yellow: '#facc15', pink: '#f472b6',
+  purple: '#a855f7', orange: '#fb923c', brown: '#92400e', grey: '#9ca3af', black: '#1f2937',
+}
+// Speak several texts in order (e.g. a story, then the question).
+globalThis.SC.speakAll = (texts) => {
+  const g = globalThis
+  if (!globalThis.SC.canSpeak()) { globalThis.SC.noAudio(); return false }
+  g.speechSynthesis.cancel()
+  for (const t of texts.filter(Boolean)) {
+    const u = new g.SpeechSynthesisUtterance(t)
+    u.lang = 'en-GB'
+    u.rate = 0.82
+    g.speechSynthesis.speak(u)
+  }
+  return true
+}
+// h('button', {class:'x', onclick}, 'text', child...)
+globalThis.SC.h = (tag, attrs = {}, ...kids) => {
+  const el = document.createElement(tag)
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue
+    if (k.startsWith('on')) el.addEventListener(k.slice(2), v)
+    else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v)
+    else el.setAttribute(k, v === true ? '' : v)
+  }
+  for (const c of kids.flat()) if (c != null && c !== false) el.append(c.nodeType ? c : String(c))
+  return el
+}
