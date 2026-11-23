@@ -45,3 +45,5 @@ button:disabled{cursor:default}.primary:disabled{opacity:.4}
 .wordbox{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.comic{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}.panel-c{border:3px solid var(--ink);border-radius:10px;padding:8px;background:white}.panel-c p{margin:6px 0 0;font-size:16px}
 .qa{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0;font-weight:700}.qa input{width:160px}input.right{border-color:var(--teal);background:var(--mint)}input.wrongfill{border-color:#d66;background:#fff0ed}.mark{font-weight:800}
 .choice:disabled,.spot:disabled,.tile:disabled.secondary{color:inherit;opacity:1}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:8px 0 18px}.card{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;background:#f6faf9;border:1px solid var(--line)}.card:hover{border-color:var(--teal)}
+.results{width:100%;border-collapse:collapse;margin:12px 0}.results td{padding:8px;border-bottom:1px solid var(--line)}.results td:last-child{text-align:right;font-weight:800}
