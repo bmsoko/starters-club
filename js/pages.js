@@ -118,7 +118,7 @@
           h('button', { class: 'primary', onclick: () => SC.startRun(examId, examId === 'task:S' ? SC.speakingQuick() : examId.startsWith('task:') ? SC.taskScreens(examId.slice(5)) : examId === 'U4' ? SC.unitScreens() : screens, title, back) }, 'Try again 🔁'),
           h('button', { class: 'secondary', onclick: () => { SC.show(back); renderAll() } }, '← Back')),
       )
-    }, { title })
+    }, { title, exam: /^L-T\d/.test(examId) })
   }
 
   const renderMocks = () => {
