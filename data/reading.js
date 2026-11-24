@@ -229,6 +229,201 @@
           }),
         ],
       },
+      {
+        id: 'R-T4',
+        title: 'Reading & Writing · Test 4',
+        tasks: [
+          task('R1', {
+            example: poster('Cake shop', ['🍰', '🍔', '🍎'], '🍰'),
+            questions: [
+              poster('Big sale! Pears and apples', ['🍐🍎', '🫛🍎', '🍌🍊'], '🍐🍎'),
+              poster('No swimming in the lake', ['🏊🚫', '🚲🚫', '⚽🚫'], '🏊🚫'),
+              poster('Come to our art class!', ['🎨', '🎸', '⚽'], '🎨'),
+              poster('Please close the door', ['🚪', '🪟', '📦'], '🚪'),
+              poster('Fresh fish every Friday', ['🐟', '🍗', '🥚'], '🐟'),
+            ],
+          }),
+          task('R2', {
+            example: chat([['Ann', 'What are you drinking?'], ['Matt', 'Orange juice!']], 'What is Matt drinking?', ['🧃', '🥛', '☕'], '🧃'),
+            questions: [
+              chat([['Eva', 'Where are you?'], ['Nick', 'In the garden with my dog.']], 'Where is Nick?', ['🌳🐕', '🏫🐕', '🏖️🐈'], '🌳🐕'),
+              chat([['Tom', 'What\'s the weather like?'], ['Sue', 'It\'s raining! ☔']], 'What is the weather like where Sue is?', ['🌧️', '☀️', '❄️'], '🌧️'),
+              chat([['Bill', 'Look at my new pet! It\'s a lizard.'], ['Grace', 'Wow! It\'s green!']], 'What is Bill\'s new pet?', ['🦎', '🐢', '🐍'], '🦎'),
+              chat([['Kim', 'It\'s my birthday party today!'], ['Lucy', 'Hooray! I love parties!']], 'Choose a sticker for Lucy.', ['🥳', '😢', '😴'], '🥳'),
+              chat([['Dan', 'What are you doing?'], ['May', 'I\'m playing the piano.']], 'What is May doing?', ['🎹', '🎸', '🥁'], '🎹'),
+            ],
+          }),
+          task('R3', {
+            example: pair('🐎', 'horse', 'h__se', ['or', 'ou', 'ar'], 'or'),
+            questions: [
+              pair('🍊', 'orange', 'or__ge', ['an', 'en', 'in'], 'an'),
+              pair('🐻', 'bear', 'b__r', ['ea', 'ee', 'ai'], 'ea'),
+              scramble('🚂', 'train'),
+              scramble('🧦', 'socks'),
+              scramble('🐸', 'frog'),
+            ],
+          }),
+          task('R4', {
+            example: gaps('Example', [['A bird can ___.', 'fly']], ['fly', 'read', 'cook']),
+            questions: [
+              gaps('Elephants', [
+                ['Elephants are very big and ___.', 'grey'],
+                ['They have got a very long ___.', 'nose'],
+                ['Elephants drink a lot of ___.', 'water'],
+                ['They eat grass and ___.', 'fruit'],
+                ['Baby elephants walk with their ___.', 'mothers'],
+              ], ['grey', 'nose', 'water', 'fruit', 'mothers', 'books', 'cars']),
+            ],
+          }),
+          task('R5', {
+            example: comic('Example', [['👧🐈‍⬛', 'Lucy has got a black cat.']], [['What colour is Lucy\'s cat?', 'black']]),
+            questions: [
+              comic('The birthday cake', [
+                ['👩🎂', 'Mum is making a big cake for Ben\'s birthday.'],
+                ['🐕🎂', 'Oh no! The dog eats the cake! Bad dog!'],
+                ['👦😢', 'Ben is very sad.'],
+                ['👨🍦👦😀', 'Dad comes home with ice cream. Now Ben is happy!'],
+              ], [
+                ['Who is making the cake?', 'mum', ['ben\'s mum']],
+                ['What animal eats the cake?', 'dog', ['the dog']],
+                ['How does Ben feel when the dog eats the cake?', 'sad', ['very sad']],
+                ['What does Dad bring?', 'ice cream', ['some ice cream', 'an ice cream']],
+                ['Whose birthday is it?', 'ben', ['ben\'s']],
+              ]),
+            ],
+          }),
+        ],
+      },
+      {
+        id: 'R-T5',
+        title: 'Reading & Writing · Test 5',
+        tasks: [
+          task('R1', {
+            example: poster('Toy shop', ['🧸', '🍞', '👗'], '🧸'),
+            questions: [
+              poster('Peas: one pound a bag', ['🫛', '🍐', '🍇'], '🫛'),
+              poster('Please don\'t run in the classroom', ['🏃🚫', '📖🚫', '✏️🚫'], '🏃🚫'),
+              poster('Look! Ducks crossing the road', ['🦆🛣️', '🐄🛣️', '🦆🌳'], '🦆🛣️'),
+              poster('Hot chocolate and cookies', ['☕🍪', '🧃🍰', '🥛🍞'], '☕🍪'),
+              poster('Lost: a brown dog called Max', ['🐕', '🐈', '🐴'], '🐕'),
+            ],
+          }),
+          task('R2', {
+            example: chat([['Tony', 'Is that your new hat?'], ['Pat', 'Yes! It\'s from my grandma.']], 'What has Pat got?', ['👒', '👟', '👜'], '👒'),
+            questions: [
+              chat([['Sam', 'Where\'s Dad?'], ['Anna', 'He\'s in the kitchen. He\'s cooking.']], 'What is Dad doing?', ['👨‍🍳', '👨😴', '👨📺'], '👨‍🍳'),
+              chat([['Jill', 'My cat is under the bed!'], ['Hugo', 'Ha ha! Is she sleeping?']], 'Where is Jill\'s cat?', ['🛏️', '🌳', '🚗'], '🛏️'),
+              chat([['Alex', 'I\'ve got a new game for my computer!'], ['Ben', 'Great! Can I play?']], 'What has Alex got?', ['🎮💻', '📕', '⚽'], '🎮💻'),
+              chat([['Eva', 'I\'m very hungry!'], ['Mum', 'Here\'s an apple.']], 'Choose a sticker for Eva.', ['😋', '😴', '😢'], '😋'),
+              chat([['Grace', 'How many brothers have you got?'], ['Tom', 'Two!']], 'How many brothers has Tom got?', ['👦👦', '👦', '👦👦👦'], '👦👦'),
+            ],
+          }),
+          task('R3', {
+            example: pair('🐍', 'snake', 'sn__e', ['ak', 'ac', 'ek'], 'ak'),
+            questions: [
+              pair('🍞', 'bread', 'br__d', ['ea', 'ee', 'ie'], 'ea'),
+              pair('🐔', 'chicken', 'chi__en', ['ck', 'kk', 'ch'], 'ck'),
+              scramble('🦓', 'zebra'),
+              scramble('🪑', 'chair'),
+              scramble('🌙', 'night'),
+            ],
+          }),
+          task('R4', {
+            example: gaps('Example', [['We sleep in a ___.', 'bed']], ['bed', 'bath', 'tree']),
+            questions: [
+              gaps('Monkeys', [
+                ['Monkeys are funny ___.', 'animals'],
+                ['They can climb ___ very well.', 'trees'],
+                ['Monkeys have got long ___.', 'tails'],
+                ['They like eating ___.', 'bananas'],
+                ['Baby monkeys sit on their mother\'s ___.', 'back'],
+              ], ['animals', 'trees', 'tails', 'bananas', 'back', 'shoes', 'boats']),
+            ],
+          }),
+          task('R5', {
+            example: comic('Example', [['👦🚲', 'Nick rides his blue bike.']], [['What does Nick ride?', 'bike', ['a bike', 'his bike']]]),
+            questions: [
+              comic('The rainy day', [
+                ['🌧️🏠', 'It is raining. Anna and Bill are at home.'],
+                ['👧👦📺', 'They watch a film about a lion.'],
+                ['👧👦🖍️', 'Then they draw pictures. Anna draws a lion too.'],
+                ['🌈☀️', 'Look! The sun comes out and there is a rainbow!'],
+              ], [
+                ['What is the weather like at the start?', 'raining', ['rainy', 'rain', 'it is raining']],
+                ['Where are Anna and Bill?', 'home', ['at home']],
+                ['What is the film about?', 'lion', ['a lion']],
+                ['What do they do after the film?', 'draw', ['draw pictures', 'they draw pictures']],
+                ['What can they see at the end?', 'rainbow', ['a rainbow', 'the sun']],
+              ]),
+            ],
+          }),
+        ],
+      },
+      {
+        id: 'R-T6',
+        title: 'Reading & Writing · Test 6',
+        tasks: [
+          task('R1', {
+            example: poster('Bike park', ['🚲', '🚗', '🚂'], '🚲'),
+            questions: [
+              poster('Pears for sale here', ['🍐', '🫛', '🥔'], '🍐'),
+              poster('Please wash your hands', ['🧼👐', '🦷🪥', '👟🧽'], '🧼👐'),
+              poster('Our school play is on Friday!', ['🎭', '⚽', '🏊'], '🎭'),
+              poster('Watch out! Big dog', ['🐕', '🐦', '🐟'], '🐕'),
+              poster('Today: chicken and chips', ['🍗🍟', '🐟🍚', '🍕🥗'], '🍗🍟'),
+            ],
+          }),
+          task('R2', {
+            example: chat([['Lucy', 'Look at the snow!'], ['May', 'Let\'s make a snowman!']], 'What do they want to make?', ['⛄', '🏰', '🪁'], '⛄'),
+            questions: [
+              chat([['Matt', 'Where\'s my ball?'], ['Kim', 'It\'s in the garden, next to the tree.']], 'Where is Matt\'s ball?', ['🌳⚽', '🛏️⚽', '🚗⚽'], '🌳⚽'),
+              chat([['Sue', 'What\'s your favourite fruit?'], ['Dan', 'Grapes! I love grapes.']], 'What is Dan\'s favourite fruit?', ['🍇', '🍊', '🍌'], '🍇'),
+              chat([['Pat', 'I\'ve got a new baby brother!'], ['Ann', 'Wow! What\'s his name?']], 'What is new in Pat\'s family?', ['👶', '🐕', '👵'], '👶'),
+              chat([['Hugo', 'My team is the winner!'], ['Nick', 'Well done! 🏆']], 'Choose a sticker for Hugo.', ['🏆', '😢', '🌧️'], '🏆'),
+              chat([['Tony', 'Do you want to go to the zoo?'], ['Eva', 'Yes! I want to see the giraffes.']], 'What does Eva want to see?', ['🦒', '🐘', '🐒'], '🦒'),
+            ],
+          }),
+          task('R3', {
+            example: pair('⛵', 'boat', 'b__t', ['oa', 'ou', 'oo'], 'oa'),
+            questions: [
+              pair('🌳', 'tree', 'tr__', ['ee', 'ea', 'ie'], 'ee'),
+              pair('🦆', 'duck', 'du__', ['ck', 'kk', 'cc'], 'ck'),
+              scramble('🐭', 'mouse'),
+              scramble('🍎', 'apple'),
+              scramble('🏠', 'house'),
+            ],
+          }),
+          task('R4', {
+            example: gaps('Example', [['We can read a ___.', 'book']], ['book', 'egg', 'shoe']),
+            questions: [
+              gaps('Crocodiles', [
+                ['Crocodiles are big ___ animals.', 'green'],
+                ['They live in ___ and lakes.', 'rivers'],
+                ['Crocodiles have got lots of ___.', 'teeth'],
+                ['They can ___ very well.', 'swim'],
+                ['Crocodiles like to sleep in the ___.', 'sun'],
+              ], ['green', 'rivers', 'teeth', 'swim', 'sun', 'pink', 'houses']),
+            ],
+          }),
+          task('R5', {
+            example: comic('Example', [['👩🌷', 'Grandma has got red flowers.']], [['What colour are the flowers?', 'red']]),
+            questions: [
+              comic('The lost kite', [
+                ['👧🪁🌬️', 'Kim is flying her yellow kite on the beach.'],
+                ['🪁🌳', 'The wind takes the kite into a tree!'],
+                ['👨🪜', 'A man gets the kite with a long ladder.'],
+                ['👧🪁😀', 'Kim says "Thank you!" She is very happy.'],
+              ], [
+                ['What colour is Kim\'s kite?', 'yellow'],
+                ['Where is Kim?', 'beach', ['on the beach', 'the beach']],
+                ['Where does the kite go?', 'tree', ['into a tree', 'a tree', 'in a tree']],
+                ['Who gets the kite?', 'man', ['a man']],
+                ['What does Kim say?', 'thank you', ['thanks']],
+              ]),
+            ],
+          }),
+        ],
+      },
     ],
     bank: {
       R1: [

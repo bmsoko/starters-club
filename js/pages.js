@@ -4,7 +4,8 @@
 ;(function (g) {
   const SC = g.SC
   const D = () => g.SC_DATA || {}
-  const PAPERS = ['listening', 'reading']
+  const PAPERS = ['listening', 'reading', 'speaking']
+  const PAPER_LABEL = { listening: '🎧 Listening', reading: '📖 Reading & Writing', speaking: '🗣️ Speaking' }
   const points = (q) => (q.type === 'gaps' ? q.sentences.length : q.type === 'comic' ? q.questions.length : 1)
 
   const findMock = (examId) => {
@@ -54,6 +55,9 @@
     return out
   }
 
+  // Quick speaking: 2 questions from each part, in exam order.
+  SC.speakingQuick = () => ['S1', 'S2', 'S3', 'S4'].flatMap((id) => SC.taskScreens(id, 2))
+
   const UNIT_LABELS = { listening: 'Listening', vocabulary: 'Vocabulary', grammar: 'Grammar', reading: 'Reading', writing: 'Writing' }
   SC.unitScreens = () => {
     const U = D().unit4
@@ -73,7 +77,7 @@
   }
 
   SC.examTitle = (examId) =>
-    findMock(examId)?.title || (examId === 'U4' ? D().unit4?.title : '') ||
+    findMock(examId)?.title || (examId === 'U4' ? D().unit4?.title : '') || (examId === 'task:S' ? 'Quick speaking' : '') ||
     (examId.startsWith('task:') ? `Practice · ${D()[paperOfTask(examId.slice(5))]?.tasks[examId.slice(5)]?.label}` : examId)
 
   // ---------------------------------------------------------------- DOM
@@ -111,7 +115,7 @@
           return h('tr', {}, h('td', {}, SC.taskLabel(id)), h('td', {}, `${v.c} / ${v.t}`))
         })),
         h('div', { class: 'actions' },
-          h('button', { class: 'primary', onclick: () => SC.startRun(examId, examId.startsWith('task:') ? SC.taskScreens(examId.slice(5)) : examId === 'U4' ? SC.unitScreens() : screens, title, back) }, 'Try again 🔁'),
+          h('button', { class: 'primary', onclick: () => SC.startRun(examId, examId === 'task:S' ? SC.speakingQuick() : examId.startsWith('task:') ? SC.taskScreens(examId.slice(5)) : examId === 'U4' ? SC.unitScreens() : screens, title, back) }, 'Try again 🔁'),
           h('button', { class: 'secondary', onclick: () => { SC.show(back); renderAll() } }, '← Back')),
       )
     }, { title })
@@ -119,17 +123,17 @@
 
   const renderMocks = () => {
     $('mockList').replaceChildren(...PAPERS.map((p) => h('div', {},
-      h('h3', {}, p === 'listening' ? '🎧 Listening' : '📖 Reading & Writing'),
+      h('h3', {}, PAPER_LABEL[p]),
       h('div', { class: 'cards' }, ...(D()[p]?.mocks || []).map((m) => h('button', { class: 'card', onclick: () => SC.startRun(m.id, SC.mockScreens(m.id), m.title, 'mocks') },
         h('b', {}, m.title.split('·')[1] || m.title), h('span', { class: 'muted' }, lastBest(m.id))))))))
   }
 
   const renderTasks = () => {
     $('taskList').replaceChildren(...PAPERS.map((p) => h('div', {},
-      h('h3', {}, p === 'listening' ? '🎧 Listening' : '📖 Reading & Writing'),
+      h('h3', {}, PAPER_LABEL[p]),
       h('div', { class: 'cards' }, ...Object.entries(D()[p]?.tasks || {}).map(([id, t], k) => h('button', { class: 'card',
         onclick: () => SC.startRun(`task:${id}`, SC.taskScreens(id), `Practice · ${t.label}`, 'tasks') },
-      h('b', {}, `Task ${k + 1}`), h('span', {}, t.label)))))))
+      h('b', {}, `${p === 'speaking' ? 'Part' : 'Task'} ${k + 1}`), h('span', {}, t.label)))))))
   }
 
   const renderHistory = () => {
@@ -156,8 +160,20 @@
       h('button', { class: 'primary', onclick: () => SC.startRun('U4', SC.unitScreens(), U.title, 'unit4') }, 'Start Unit 4 ▶'))
   }
 
-  const renderAll = () => { renderMocks(); renderTasks(); renderHistory(); renderUnit() }
-  SC.onShow = (v) => { if (['mocks', 'tasks', 'progress', 'unit4'].includes(v)) renderAll() }
+  const renderSpeaking = () => {
+    const box = $('speakArea')
+    if (!box) return
+    const S = D().speaking
+    if (!S) return
+    box.replaceChildren(
+      h('div', { class: 'cards' }, ...S.mocks.map((m) => h('button', { class: 'card', onclick: () => SC.startRun(m.id, SC.mockScreens(m.id), m.title, 'speaking') },
+        h('b', {}, m.title.split('·')[1] || m.title), h('span', { class: 'muted' }, lastBest(m.id)))),
+      h('button', { class: 'card', onclick: () => SC.startRun('task:S', SC.speakingQuick(), 'Quick speaking', 'speaking') },
+        h('b', {}, 'Quick speaking 🎲'), h('span', { class: 'muted' }, 'Random questions from every part'))))
+  }
+
+  const renderAll = () => { renderMocks(); renderTasks(); renderHistory(); renderUnit(); renderSpeaking() }
+  SC.onShow = (v) => { if (SC.stopAudio) SC.stopAudio(); if (['mocks', 'tasks', 'progress', 'unit4', 'speaking'].includes(v)) renderAll() }
   document.addEventListener('DOMContentLoaded', renderAll)
   if (document.readyState !== 'loading') renderAll()
 })(globalThis)

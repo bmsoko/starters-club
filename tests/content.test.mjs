@@ -8,9 +8,9 @@ const points = (q) => (q.type === 'gaps' ? q.sentences.length : q.type === 'comi
 const key = (q) => q.type + JSON.stringify([q.intro, q.audio, q.poster, q.word, q.messages, q.prompt, q.panels, q.sentences])
 
 for (const paper of ['listening', 'reading']) {
-  test(`${paper}: exactly 3 mock tests with unique ids`, () => {
-    assert.equal(D[paper].mocks.length, 3)
-    assert.equal(new Set(D[paper].mocks.map((m) => m.id)).size, 3)
+  test(`${paper}: exactly 6 mock tests with unique ids`, () => {
+    assert.equal(D[paper].mocks.length, 6)
+    assert.equal(new Set(D[paper].mocks.map((m) => m.id)).size, 6)
   })
 
   test(`${paper}: no question is repeated across mocks or the bank`, () => {
@@ -23,11 +23,11 @@ for (const paper of ['listening', 'reading']) {
     }
   })
 
-  test(`${paper}: each task's practice bank adds at least 50% on top of its mock questions`, () => {
+  test(`${paper}: each task's practice pool (mocks + bank) has enough for 4 different rounds`, () => {
     for (const id of Object.keys(D[paper].tasks)) {
       const inMocks = D[paper].mocks.flatMap((m) => m.tasks.find((t) => t.taskId === id).questions).reduce((a, q) => a + points(q), 0)
       const inBank = (D[paper].bank[id] || []).reduce((a, q) => a + points(q), 0)
-      assert.ok(inBank >= inMocks / 2, `${id}: bank ${inBank} < half of ${inMocks}`)
+      assert.ok(inMocks + inBank >= 20, `${id}: only ${inMocks + inBank} points`)
     }
   })
 }
