@@ -116,6 +116,12 @@
   const PAPER_NAME = { listening: 'Listening', reading: 'Reading & Writing', speaking: 'Speaking' }
   SC.isExam = (examId) => /^L-T\d/.test(examId) || examId === 'new:listening'
 
+  const vocabTitle = (rest) => {
+    const [topic, game = 'listen'] = rest.split(':')
+    const G = (SC.VOCAB_GAMES || []).find((x) => x.id === game)
+    return `Vocabulary · ${SC.vocabTopic?.(topic)?.title || ''}${G ? ' · ' + G.label : ''}`
+  }
+
   const UNIT_LABELS = { listening: 'Listening', vocabulary: 'Vocabulary', grammar: 'Grammar', reading: 'Reading', writing: 'Writing' }
   SC.unitScreens = () => {
     const U = D().unit4
@@ -123,7 +129,7 @@
     return Object.keys(UNIT_LABELS).flatMap((sec) =>
       SC.shuffle(U.items[sec] || []).slice(0, U.counts[sec] || 0).map((q) => screen({ taskId: sec, label: UNIT_LABELS[sec], help: '' }, q)))
   }
-  SC.taskLabel = (id) => D()[paperOfTask(id)]?.tasks?.[id]?.label || UNIT_LABELS[id] || (id === 'vocab' ? 'Listen and point' : id)
+  SC.taskLabel = (id) => D()[paperOfTask(id)]?.tasks?.[id]?.label || UNIT_LABELS[id] || ((SC.VOCAB_GAMES || []).find((x) => x.id === id)?.label || (id === 'vocab' ? 'Listen and point' : id))
 
   SC.recordResult = (examId, { score, total, byTask }) => {
     const s = SC.loadStats()
@@ -135,7 +141,7 @@
   }
 
   SC.examTitle = (examId) =>
-    findMock(examId)?.title || (examId.startsWith('vocab:') ? `Vocabulary · ${SC.vocabTopic?.(examId.slice(6))?.title || ''}` : '') || (examId.startsWith('new:') ? `${PAPER_NAME[examId.slice(4)]} · New mock exam` : '') || (examId === 'U4' ? D().unit4?.title : '') || (examId === 'task:S' ? 'Quick speaking' : '') ||
+    findMock(examId)?.title || (examId.startsWith('vocab:') ? vocabTitle(examId.slice(6)) : '') || (examId.startsWith('new:') ? `${PAPER_NAME[examId.slice(4)]} · New mock exam` : '') || (examId === 'U4' ? D().unit4?.title : '') || (examId === 'task:S' ? 'Quick speaking' : '') ||
     (examId.startsWith('task:') ? `Practice · ${D()[paperOfTask(examId.slice(5))]?.tasks[examId.slice(5)]?.label}` : examId)
 
   // ---------------------------------------------------------------- DOM
@@ -183,8 +189,7 @@
   const newCard = (p, back) => h('button', { class: 'card new', onclick: () => SC.startRun(`new:${p}`, SC.newMockScreens(p), SC.examTitle(`new:${p}`), back) },
     h('b', {}, '🎲 New mock exam'), h('span', { class: 'muted' }, `A new test every time · ${lastBest(`new:${p}`)}`))
 
-  const vocabScreens = (id) => SC.vocabRounds(id, 8).map((r) => ({ taskId: 'vocab', taskLabel: 'Listen and point', help: 'Listen. Tap the right picture.',
-    q: { type: 'vpick', audio: r.answer.en, options: r.options, answer: r.answer } }))
+  const vocabScreens = (rest) => { const [topic, game = 'listen'] = rest.split(':'); return SC.vocabScreens(topic, game) }
 
   const renderMocks = () => {
     $('mockList').replaceChildren(...PAPERS.map((p) => h('div', {},

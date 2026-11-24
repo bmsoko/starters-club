@@ -47,3 +47,17 @@ standards and the Cambridge way of teaching young learners.
 - `data/vocab.js` and `js/vocab.js`.
 - A Vocabulary 📚 tab.
 - 259 new recordings.
+
+## Update: more vocabulary games (Bruno asked)
+
+Each topic now has four games, in the order a young learner meets the
+skills:
+
+1. 🎧 **Listen and point.**
+2. 📖 **Read and choose**: read the word, tap its picture.
+3. ✏️ **Look and spell**: letter tiles, as in R&W Task 3. One-word answers
+   only.
+4. ✅ **Listen: yes or no?**: see a picture and hear a word; does it match?
+   About half the answers are "yes".
+
+Each game has up to 8 rounds, and its scores go to My stars.

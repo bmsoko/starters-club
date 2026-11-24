@@ -41,3 +41,37 @@ test('all vocabulary words and phrases are spoken (recorded)', () => {
   const s = SC.spokenTexts(globalThis.SC_DATA)
   for (const t of T) for (const x of [...t.words, ...t.phrases]) assert.ok(s.includes(x.en), x.en)
 })
+
+test('vocabScreens: every game gives 8 rounds in every topic', () => {
+  for (const t of T) for (const game of SC.VOCAB_GAMES.map((x) => x.id)) {
+    const s = SC.vocabScreens(t.id, game)
+    assert.ok(s.length >= 6 && s.length <= 8, `${t.id} ${game}: ${s.length}`)
+    assert.ok(s.every((x) => x.taskId === game && x.q.type), `${t.id} ${game}`)
+  }
+})
+
+test('read and choose: written word, 4 different pictures, answer among them', () => {
+  for (const x of SC.vocabScreens('animals', 'read')) {
+    assert.equal(x.q.type, 'vread')
+    assert.equal(x.q.options.length, 4)
+    assert.ok(x.q.options.includes(x.q.answer))
+  }
+})
+
+test('look and spell: only one-word answers, tiles hold every letter', () => {
+  for (const t of T) for (const x of SC.vocabScreens(t.id, 'spell')) {
+    assert.match(x.q.word, /^[a-z]+$/, x.q.word)
+    const tiles = [...x.q.tiles]
+    for (const c of x.q.word) { const i = tiles.indexOf(c); assert.ok(i >= 0, x.q.word); tiles.splice(i, 1) }
+  }
+})
+
+test('yes or no: the right answer matches whether the word fits the picture', () => {
+  let yes = 0
+  for (let i = 0; i < 10; i++) for (const x of SC.vocabScreens('food', 'yesno')) {
+    assert.equal(x.q.type, 'vyesno')
+    assert.equal(x.q.correct, x.q.said === x.q.shown)
+    if (x.q.correct) yes++
+  }
+  assert.ok(yes > 20 && yes < 60, `yes answers: ${yes}/80`)
+})

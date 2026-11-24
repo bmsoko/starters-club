@@ -62,3 +62,4 @@ button:disabled{cursor:default}.primary:disabled{opacity:.4}
 .swatch{display:inline-block;width:52px;height:52px;border-radius:50%;border:2px solid var(--line)}
 .choices.pics .choice .swatch{width:56px;height:56px}
 .phrases{display:flex;flex-direction:column;gap:8px}.phrase{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:#f6faf9;border:1px solid var(--line)}
+.vword{font-size:40px;text-align:center}.yesno{justify-content:center}.yesno .choice{font-size:24px;min-width:130px;text-align:center}.big-pic .swatch{width:90px;height:90px}
