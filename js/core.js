@@ -156,13 +156,20 @@ globalThis.SC.SWATCH = {
   }
 
   SC.speakAll = (texts) => {
-    const list = texts.filter(Boolean)
+    const list = texts.filter((t) => t || t === 0)
     const canFile = typeof g.Audio !== 'undefined'
-    if (!SC.canSpeak() && !(canFile && list.every(SC.audioFile))) { SC.noAudio(); return false }
+    if (!SC.canSpeak() && !(canFile && list.every((t) => typeof t === 'number' || SC.audioFile(t)))) { SC.noAudio(); return false }
     SC.stopAudio()
     const my = token
     const playFrom = (i) => {
       if (my !== token || i >= list.length) return
+      // A number is a pause (ms) between plays.
+      if (typeof list[i] === 'number') {
+        if (!g.speechSynthesis || !g.speechSynthesis.speaking) return setTimeout(() => playFrom(i + 1), list[i])
+        // TTS is still talking: wait until it finishes, then pause
+        const wait = () => (my !== token ? null : g.speechSynthesis.speaking ? setTimeout(wait, 200) : setTimeout(() => playFrom(i + 1), list[i]))
+        return wait()
+      }
       const file = canFile && SC.audioFile(list[i])
       if (!file) {
         if (SC.canSpeak()) tts(list[i])

@@ -42,7 +42,7 @@
         next.disabled = false
         next.focus()
       }
-      SC.renderers[s.q.type](area, s.q, done, { intro: s.intro, playIntro })
+      SC.renderers[s.q.type](area, s.q, done, { intro: s.intro, playIntro, exam: !!opts.exam, taskId: s.taskId })
       next.onclick = () => {
         if (i < screens.length - 1) { i++; show(); return }
         if (finished) return
@@ -56,13 +56,29 @@
   }
 
   // Shared UI bits for renderers -------------------------------------------
-  // A "listen" button that plays [intro?, audio]; autoplays once.
+  // Exam rules (Starters Digital): in mock exams each recording plays twice;
+  // only Task 4 (interactive dialogue) can be replayed as often as needed.
+  SC.REPEAT_PAUSE = 2500 // ms between the two plays
+  SC.playlist = (audio, ctx = {}) => {
+    const once = ctx.playIntro && ctx.intro ? [ctx.intro, audio] : [audio]
+    return ctx.exam ? [...once, SC.REPEAT_PAUSE, ...once] : once
+  }
+  SC.canReplay = (ctx = {}) => !ctx.exam || ctx.taskId === 'L4'
+
+  // The listen buttons; autoplays once (twice in exams).
   SC.audioButton = (audio, ctx = {}, label = '🔊 Listen again') => {
     const h = SC.h
     const wrap = h('div', { class: 'actions' })
-    if (ctx.intro) wrap.append(h('button', { class: 'secondary', onclick: () => SC.speakAll([ctx.intro]) }, '📖 Story'))
-    wrap.append(h('button', { class: 'secondary', onclick: () => SC.speakAll([audio]) }, label))
-    setTimeout(() => SC.speakAll(ctx.playIntro ? [ctx.intro, audio] : [audio]), 50)
+    if (SC.canReplay(ctx)) {
+      if (ctx.intro) wrap.append(h('button', { class: 'secondary', onclick: () => SC.speakAll([ctx.intro]) }, '📖 Story'))
+      wrap.append(h('button', { class: 'secondary', onclick: () => SC.speakAll([audio]) }, label))
+    } else {
+      // Exam: no replays. One "start again" in case the sound didn't start
+      // (some tablets block autoplay); it uses up the two plays.
+      const b = h('button', { class: 'secondary', onclick: () => { b.disabled = true; b.textContent = '🔊 Played 2 times'; SC.speakAll(SC.playlist(audio, { ...ctx, playIntro: !!ctx.intro })) } }, '🔊 No sound? Start again')
+      wrap.append(h('span', { class: 'muted' }, '🎧 You will hear it 2 times.'), b)
+    }
+    setTimeout(() => SC.speakAll(SC.playlist(audio, ctx)), 50)
     return wrap
   }
   SC.feedback = (ok, answer) =>
