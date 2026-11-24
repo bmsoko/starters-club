@@ -16,15 +16,15 @@ const SC = globalThis.SC
 
 // Speaker -> macOS voice, speech rate (words/min) and pitch factor.
 const VOICES = {
-// Rate 135 + a pause between sentences gives ~120 words/min for short items
-// and ~95 for stories: slow and clear, for Pre A1 children.
-  N: { voice: 'Daniel', rate: 135, pitch: 1 },
-  M: { voice: 'Daniel', rate: 135, pitch: 0.9 },
-  W: { voice: 'Moira', rate: 135, pitch: 1 },
-  B: { voice: 'Daniel', rate: 135, pitch: 1.28 },
-  G: { voice: 'Moira', rate: 135, pitch: 1.2 },
+// Rate 150 + a short pause between sentences gives ~130 words/min for short items
+// and ~110 for stories: clear and calm for Pre A1 children.
+  N: { voice: 'Daniel', rate: 150, pitch: 1 },
+  M: { voice: 'Daniel', rate: 150, pitch: 0.9 },
+  W: { voice: 'Moira', rate: 150, pitch: 1 },
+  B: { voice: 'Daniel', rate: 150, pitch: 1.28 },
+  G: { voice: 'Moira', rate: 150, pitch: 1.2 },
 }
-const SHORT_RATE = 105
+const SHORT_RATE = 115
 const SPELLING = /^([A-Z], )+[A-Z]\.?$/ // "B, E, N."
 const RATE = 22050
 
@@ -38,7 +38,7 @@ async function record(text, out, tmp) {
     const aiff = join(tmp, `${i}.aiff`)
     // Spell letters slowly: speak each letter as its own word with pauses.
     const sentences = s.text.split(/(?<=[.?!])\s+/)
-    const words = sentences.map((w) => (SPELLING.test(w) ? w.replace(/[.,]/g, '').split(' ').join(' [[slnc 400]] ') : w)).join(' [[slnc 400]] ')
+    const words = sentences.map((w) => (SPELLING.test(w) ? w.replace(/[.,]/g, '').split(' ').join(' [[slnc 300]] ') : w)).join(' [[slnc 300]] ')
     // A single short sentence needs a lower rate to reach the same ~120 words/min.
     const rate = sentences.length === 1 ? SHORT_RATE : v.rate
     await run('say', ['-v', v.voice, '-r', String(rate), '-o', aiff, words])

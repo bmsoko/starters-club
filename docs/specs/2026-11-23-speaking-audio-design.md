@@ -99,3 +99,10 @@ uses one voice for every speaker, which makes it unlike the real test.
     block autoplay.
   - Task 4 keeps unlimited replay.
   - Practice by task, Unit 4 and Speaking keep unlimited "Listen again".
+
+## Update 2026-11-24 (later): a bit faster (Bruno asked)
+
+- The rates are now 150 (longer lines) and 115 (single short sentences),
+  with a 0.3 s pause between sentences.
+- Measured over all recordings: median ~111 words per minute (it was ~98).
+  Short sentences are ~138 and stories ~141.
