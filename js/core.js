@@ -60,6 +60,7 @@
     }
     walk([data.listening, data.unit4, data.speaking])
     for (const w of data.spelling || []) out.add(w.word)
+    for (const t of (data.vocab && data.vocab.topics) || []) for (const x of [...t.words, ...t.phrases]) out.add(x.en)
     return [...out]
   }
   SC.audioFile = (text) => {
@@ -92,6 +93,15 @@
   }
   SC.saveStats = (s) => write('startersStats', s)
 
+  // How many times each question has been seen (finished runs only).
+  SC.qKey = (q) => SC.audioKey(JSON.stringify({ ...q, intro: undefined }))
+  SC.seenCounts = () => read('startersSeen', {})
+  SC.markSeen = (qs) => {
+    const c = SC.seenCounts()
+    for (const q of qs) { const k = SC.qKey(q); c[k] = (Number(c[k]) || 0) + 1 }
+    write('startersSeen', c)
+  }
+
   SC.exams = {
     load: () => read('startersExams', {}),
     add(examId, entry) {
@@ -116,7 +126,7 @@ globalThis.SC.noAudio = () => {
 globalThis.SC.COLOURS = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'brown', 'grey', 'black']
 globalThis.SC.SWATCH = {
   red: '#ef4444', blue: '#3b82f6', green: '#22c55e', yellow: '#facc15', pink: '#f472b6',
-  purple: '#a855f7', orange: '#fb923c', brown: '#92400e', grey: '#9ca3af', black: '#1f2937',
+  purple: '#a855f7', orange: '#fb923c', brown: '#92400e', grey: '#9ca3af', black: '#1f2937', white: '#ffffff',
 }
 // Speak several texts in order (e.g. a story, then the question).
 // Recorded MP3s are used when available; otherwise browser TTS, one voice
@@ -156,13 +166,20 @@ globalThis.SC.SWATCH = {
   }
 
   SC.speakAll = (texts) => {
-    const list = texts.filter(Boolean)
+    const list = texts.filter((t) => t || t === 0)
     const canFile = typeof g.Audio !== 'undefined'
-    if (!SC.canSpeak() && !(canFile && list.every(SC.audioFile))) { SC.noAudio(); return false }
+    if (!SC.canSpeak() && !(canFile && list.every((t) => typeof t === 'number' || SC.audioFile(t)))) { SC.noAudio(); return false }
     SC.stopAudio()
     const my = token
     const playFrom = (i) => {
       if (my !== token || i >= list.length) return
+      // A number is a pause (ms) between plays.
+      if (typeof list[i] === 'number') {
+        if (!g.speechSynthesis || !g.speechSynthesis.speaking) return setTimeout(() => playFrom(i + 1), list[i])
+        // TTS is still talking: wait until it finishes, then pause
+        const wait = () => (my !== token ? null : g.speechSynthesis.speaking ? setTimeout(wait, 200) : setTimeout(() => playFrom(i + 1), list[i]))
+        return wait()
+      }
       const file = canFile && SC.audioFile(list[i])
       if (!file) {
         if (SC.canSpeak()) tts(list[i])

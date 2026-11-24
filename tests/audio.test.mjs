@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { load } from './helpers.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const SC = load('js/core.js', 'data/listening.js', 'data/reading.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js', 'data/audio-index.js')
+const SC = load('js/core.js', 'data/listening.js', 'data/reading.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js', 'data/vocab.js', 'data/audio-index.js')
 const D = globalThis.SC_DATA
 
 test('parseSpeech splits speakers and defaults to the narrator', () => {
@@ -47,4 +47,18 @@ test('every spoken text has a recorded file (run: node tools/make-audio.mjs)', (
 test('note-taking dialogues have two speakers', () => {
   const all = [...D.listening.mocks.flatMap((m) => m.tasks.flatMap((t) => [t.example, ...t.questions])), ...D.listening.bank.L3]
   for (const q of all.filter((q) => q.type === 'notes')) assert.equal(SC.parseSpeech(q.audio).length, 2, q.audio)
+})
+
+test('playlist: practice plays once, mock exams play twice with a pause', () => {
+  load('js/runner.js')
+  assert.deepEqual(SC.playlist('Hi.', {}), ['Hi.'])
+  assert.deepEqual(SC.playlist('Q?', { intro: 'Story.', playIntro: true }), ['Story.', 'Q?'])
+  assert.deepEqual(SC.playlist('Hi.', { exam: true }), ['Hi.', SC.REPEAT_PAUSE, 'Hi.'])
+  assert.deepEqual(SC.playlist('Q?', { exam: true, intro: 'Story.', playIntro: true }), ['Story.', 'Q?', SC.REPEAT_PAUSE, 'Story.', 'Q?'])
+})
+
+test('replay rule: unlimited in practice and exam Task 4, otherwise not', () => {
+  assert.equal(SC.canReplay({}), true)
+  assert.equal(SC.canReplay({ exam: true, taskId: 'L4' }), true)
+  assert.equal(SC.canReplay({ exam: true, taskId: 'L3' }), false)
 })

@@ -9,19 +9,22 @@ import { join } from 'node:path'
 import vm from 'node:vm'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-for (const f of ['js/core.js', 'data/listening.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js']) {
+for (const f of ['js/core.js', 'data/listening.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js', 'data/vocab.js']) {
   vm.runInThisContext(readFileSync(root + f, 'utf8'), { filename: f })
 }
 const SC = globalThis.SC
 
 // Speaker -> macOS voice, speech rate (words/min) and pitch factor.
 const VOICES = {
-  N: { voice: 'Daniel', rate: 150, pitch: 1 },
-  M: { voice: 'Daniel', rate: 150, pitch: 0.9 },
-  W: { voice: 'Moira', rate: 150, pitch: 1 },
-  B: { voice: 'Daniel', rate: 155, pitch: 1.28 },
-  G: { voice: 'Moira', rate: 155, pitch: 1.2 },
+// Rate 135 + a pause between sentences gives ~120 words/min for short items
+// and ~95 for stories: slow and clear, for Pre A1 children.
+  N: { voice: 'Daniel', rate: 135, pitch: 1 },
+  M: { voice: 'Daniel', rate: 135, pitch: 0.9 },
+  W: { voice: 'Moira', rate: 135, pitch: 1 },
+  B: { voice: 'Daniel', rate: 135, pitch: 1.28 },
+  G: { voice: 'Moira', rate: 135, pitch: 1.2 },
 }
+const SHORT_RATE = 105
 const SPELLING = /^([A-Z], )+[A-Z]\.?$/ // "B, E, N."
 const RATE = 22050
 
@@ -34,15 +37,18 @@ async function record(text, out, tmp) {
     const v = VOICES[s.who]
     const aiff = join(tmp, `${i}.aiff`)
     // Spell letters slowly: speak each letter as its own word with pauses.
-    const words = s.text.split(/(?<=[.?!])\s+/).map((w) => (SPELLING.test(w) ? w.replace(/[.,]/g, '').split(' ').join(' [[slnc 350]] ') : w)).join(' ')
-    await run('say', ['-v', v.voice, '-r', String(v.rate), '-o', aiff, words])
+    const sentences = s.text.split(/(?<=[.?!])\s+/)
+    const words = sentences.map((w) => (SPELLING.test(w) ? w.replace(/[.,]/g, '').split(' ').join(' [[slnc 400]] ') : w)).join(' [[slnc 400]] ')
+    // A single short sentence needs a lower rate to reach the same ~120 words/min.
+    const rate = sentences.length === 1 ? SHORT_RATE : v.rate
+    await run('say', ['-v', v.voice, '-r', String(rate), '-o', aiff, words])
     parts.push({ aiff, pitch: v.pitch })
   }
   const args = ['-y', '-loglevel', 'error']
   for (const p of parts) args.push('-i', p.aiff)
   const filters = parts.map((p, i) => {
     const shift = p.pitch === 1 ? '' : `asetrate=${Math.round(RATE * p.pitch)},atempo=${(1 / p.pitch).toFixed(4)},`
-    return `[${i}:a]aresample=${RATE},${shift}aresample=${RATE},apad=pad_dur=0.45[a${i}]`
+    return `[${i}:a]aresample=${RATE},${shift}aresample=${RATE},apad=pad_dur=0.8[a${i}]`
   })
   filters.push(parts.map((_, i) => `[a${i}]`).join('') + `concat=n=${parts.length}:v=0:a=1[out]`)
   args.push('-filter_complex', filters.join(';'), '-map', '[out]', '-ac', '1', '-ar', String(RATE), '-b:a', '48k', out)

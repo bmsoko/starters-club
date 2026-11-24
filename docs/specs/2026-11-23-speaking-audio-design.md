@@ -82,3 +82,20 @@ uses one voice for every speaker, which makes it unlike the real test.
 
 - Exact voices and rates, chosen by listening to samples.
 - The new content, at Starters wordlist level and original.
+
+## Update 2026-11-24: speed and repeats (Bruno approved)
+
+- **Speed.** Cambridge publishes no words-per-minute figure, so we aim for
+  slow and clear Pre A1 speech.
+  - Recordings run at about 95–125 words per minute (median ~100).
+  - Short sentences use `say` rate 105.
+  - Longer lines use rate 135, with a 0.4 s pause between sentences.
+  - Spelled names are read letter by letter, with pauses.
+- **Repeats.** In mock exams this follows Cambridge's Starters Digital
+  format page: "in most tasks, children will hear the audio twice; in task
+  4 they can listen as many times as they need".
+  - Listening mocks play each recording twice, with a 2.5 s gap.
+  - The only replay is a single "No sound? Start again", for tablets that
+    block autoplay.
+  - Task 4 keeps unlimited replay.
+  - Practice by task, Unit 4 and Speaking keep unlimited "Listen again".
