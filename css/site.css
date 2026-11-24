@@ -54,3 +54,11 @@ button:disabled{cursor:default}.primary:disabled{opacity:.4}
 .speak-pic.card-pic{font-size:96px;max-width:220px;margin:12px auto;background:white;border:4px solid var(--ink);box-shadow:4px 4px 0 var(--line)}
 .examples{background:#fffbe8;border-radius:12px;padding:10px 14px;margin:10px 0}.examples summary{cursor:pointer;font-weight:700}.examples ul{margin:8px 0 0}
 .card.new{background:#fff3c4;border-color:#f4b400}
+
+/* --- Vocabulary --- */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin:12px 0}
+.vcard{display:flex;flex-direction:column;align-items:center;gap:4px;background:white;border:2px solid var(--line);padding:10px 6px}.vcard:hover{border-color:var(--teal)}
+.vpic{font-size:44px;line-height:1.1}.vcard .vpic{min-height:50px;display:flex;align-items:center}
+.swatch{display:inline-block;width:52px;height:52px;border-radius:50%;border:2px solid var(--line)}
+.choices.pics .choice .swatch{width:56px;height:56px}
+.phrases{display:flex;flex-direction:column;gap:8px}.phrase{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:#f6faf9;border:1px solid var(--line)}

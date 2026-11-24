@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { load } from './helpers.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const SC = load('js/core.js', 'data/listening.js', 'data/reading.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js', 'data/audio-index.js')
+const SC = load('js/core.js', 'data/listening.js', 'data/reading.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js', 'data/vocab.js', 'data/audio-index.js')
 const D = globalThis.SC_DATA
 
 test('parseSpeech splits speakers and defaults to the narrator', () => {

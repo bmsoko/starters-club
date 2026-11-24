@@ -60,6 +60,7 @@
     }
     walk([data.listening, data.unit4, data.speaking])
     for (const w of data.spelling || []) out.add(w.word)
+    for (const t of (data.vocab && data.vocab.topics) || []) for (const x of [...t.words, ...t.phrases]) out.add(x.en)
     return [...out]
   }
   SC.audioFile = (text) => {
@@ -125,7 +126,7 @@ globalThis.SC.noAudio = () => {
 globalThis.SC.COLOURS = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'brown', 'grey', 'black']
 globalThis.SC.SWATCH = {
   red: '#ef4444', blue: '#3b82f6', green: '#22c55e', yellow: '#facc15', pink: '#f472b6',
-  purple: '#a855f7', orange: '#fb923c', brown: '#92400e', grey: '#9ca3af', black: '#1f2937',
+  purple: '#a855f7', orange: '#fb923c', brown: '#92400e', grey: '#9ca3af', black: '#1f2937', white: '#ffffff',
 }
 // Speak several texts in order (e.g. a story, then the question).
 // Recorded MP3s are used when available; otherwise browser TTS, one voice

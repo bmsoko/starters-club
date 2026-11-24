@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Starters Club · Cambridge Pre A1</title>
 <link rel="stylesheet" href="css/site.css"></head><body><header><div class="wrap"><b>★ STARTERS CLUB · PRE A1 DIGITAL PRACTICE</b><h1>Let’s play English!</h1><p>Un espacio de práctica para preparar Cambridge Pre A1 Starters.</p></div></header>
-<main><nav class="tabs"><button class="tab active" data-view="home">Home</button><button class="tab" data-view="practice">Quick round</button><button class="tab" data-view="mocks">Mock exams 📝</button><button class="tab" data-view="tasks">Practice by task</button><button class="tab" data-view="unit4">Unit 4 🏠</button><button class="tab" data-view="speaking">Speaking 🗣️</button><button class="tab" data-view="spelling">Spelling ✏️</button><button class="tab" data-view="progress">My stars</button></nav>
+<main><nav class="tabs"><button class="tab active" data-view="home">Home</button><button class="tab" data-view="practice">Quick round</button><button class="tab" data-view="mocks">Mock exams 📝</button><button class="tab" data-view="tasks">Practice by task</button><button class="tab" data-view="unit4">Unit 4 🏠</button><button class="tab" data-view="vocab">Vocabulary 📚</button><button class="tab" data-view="speaking">Speaking 🗣️</button><button class="tab" data-view="spelling">Spelling ✏️</button><button class="tab" data-view="progress">My stars</button></nav>
 <p id="noAudio" class="feedback bad hidden">🔇 Audio is not available in this browser. Ask a grown-up to read the words aloud.</p>
 <section id="home" class="panel"><h2>¡A practicar jugando!</h2><p class="muted">Cada ronda mezcla vocabulario, lectura, escritura y listening. ¡Jugá y sumá estrellas!</p><div style="font-size:48px">🦒 🐵 🐢 🌴 🐠 ⭐</div><div class="actions"><button class="primary" id="start">Start a new round ▶</button><button class="secondary" id="quickListen">Try listening 🔊</button></div><div class="stats"><div class="stat"><b id="totalStars">0 ⭐</b>Stars</div><div class="stat"><b id="rounds">0</b>Rounds</div><div class="stat"><b>Pre A1</b>Level</div></div></section>
 <section id="practice" class="panel hidden"><div class="muted" id="skill">VOCABULARY</div><h2 id="taskTitle">Choose the correct answer</h2><b id="counter">1 / 10</b><div class="progress"><span id="bar"></span></div><div id="taskArea"></div><div id="feedback" class="feedback hidden"></div><div class="footer"><button class="secondary" id="hear">🔊 Listen</button><button class="primary" id="check">Check answer</button><button class="primary hidden" id="next">Next →</button></div></section>
@@ -9,6 +9,7 @@
 <section id="mocks" class="panel hidden"><div class="muted">MOCK EXAMS · STARTERS DIGITAL FORMAT</div><h2>Mock exams 📝</h2><p class="muted">Listening up to 40 min · Reading &amp; Writing up to 25 min</p><div id="mockList"></div></section>
 <section id="tasks" class="panel hidden"><div class="muted">PRACTICE BY TASK</div><h2>Practice one task</h2><p class="muted">5 preguntas al azar de la tarea que elijas.</p><div id="taskList"></div></section>
 <section id="unit4" class="panel hidden"><div class="muted">SCHOOL UNIT</div><h2>Unit 4 · Family &amp; Homes 🏠</h2><div id="unitArea"></div></section>
+<section id="vocab" class="panel hidden"><div class="muted">VOCABULARY · PRE A1 STARTERS WORDLIST TOPICS</div><h2>Vocabulary 📚</h2><p class="muted">Mirá, escuchá y repetí. Después jugá a "Listen and point".</p><div id="vocabArea"></div></section>
 <section id="speaking" class="panel hidden"><div class="muted">SPEAKING · WITH A GROWN-UP</div><h2>Speaking 🗣️</h2><p class="muted">The site asks the questions. Estani answers out loud, and a grown-up marks each answer. About 5 minutes.</p><div id="speakArea"></div></section>
 <section id="exam" class="panel hidden"><div id="examArea"></div></section>
 <section id="progress" class="panel hidden"><h2>My stars ⭐</h2><p class="muted">Tus resultados se guardan en este navegador.</p><div class="stats"><div class="stat"><b id="pStars">0</b>Stars</div><div class="stat"><b id="pRounds">0</b>Completed rounds</div><div class="stat"><b id="pBest">0%</b>Best score</div></div><button class="primary" id="again">Practice again</button> <button class="secondary" id="reset">Reset progress</button></section>
@@ -25,5 +26,7 @@
 <script src="js/tasks/speaking.js"></script>
 <script src="data/speaking.js"></script>
 <script src="data/spelling.js"></script>
+<script src="data/vocab.js"></script>
+<script src="js/vocab.js"></script>
 <script src="js/legacy.js"></script>
 <script src="js/pages.js"></script></body></html>

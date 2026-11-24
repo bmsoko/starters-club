@@ -9,7 +9,7 @@ import { join } from 'node:path'
 import vm from 'node:vm'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-for (const f of ['js/core.js', 'data/listening.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js']) {
+for (const f of ['js/core.js', 'data/listening.js', 'data/unit4.js', 'data/spelling.js', 'data/speaking.js', 'data/vocab.js']) {
   vm.runInThisContext(readFileSync(root + f, 'utf8'), { filename: f })
 }
 const SC = globalThis.SC
