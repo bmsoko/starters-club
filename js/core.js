@@ -92,6 +92,15 @@
   }
   SC.saveStats = (s) => write('startersStats', s)
 
+  // How many times each question has been seen (finished runs only).
+  SC.qKey = (q) => SC.audioKey(JSON.stringify({ ...q, intro: undefined }))
+  SC.seenCounts = () => read('startersSeen', {})
+  SC.markSeen = (qs) => {
+    const c = SC.seenCounts()
+    for (const q of qs) { const k = SC.qKey(q); c[k] = (Number(c[k]) || 0) + 1 }
+    write('startersSeen', c)
+  }
+
   SC.exams = {
     load: () => read('startersExams', {}),
     add(examId, entry) {
