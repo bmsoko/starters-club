@@ -50,5 +50,14 @@
     { word: 'below', clue: '⬇️' },
     { word: 'hippo', clue: '🦛' },
     { word: 'parrot', clue: '🦜' },
+    // Spelling test words, 2026-11-26
+    { word: 'street', clue: '🛣️' },
+    { word: 'table tennis', clue: '🏓' },
+    { word: 'goat', clue: '🐐' },
+    { word: 'horse', clue: '🐴' },
+    { word: 'sheep', clue: '🐑' },
+    { word: 'duck', clue: '🦆' },
+    { word: 'pear', clue: '🍐' },
+    { word: 'lemonade', clue: '🍋🥤' },
   ]
 })(globalThis)
