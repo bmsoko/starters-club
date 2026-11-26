@@ -33,3 +33,8 @@ test('spelling list includes Estani\'s missed words with no duplicates', () => {
   assert.equal(new Set(words).size, words.length)
   assert.ok(globalThis.SC_DATA.spelling.every((w) => w.clue))
 })
+
+test('spelling list has the 2026-11-26 spelling-test words', () => {
+  const words = globalThis.SC_DATA.spelling.map((w) => w.word)
+  for (const w of ['street', 'table tennis', 'bird', 'hat', 'goat', 'picture', 'horse', 'sheep', 'duck', 'pear', 'lemonade']) assert.ok(words.includes(w), w)
+})
